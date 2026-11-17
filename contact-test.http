@@ -1,0 +1,10 @@
+### Formulario de Contacto
+POST http://localhost:8080/api/contact
+content-Type: application/json
+
+{
+
+"name": "Sebastian",
+"email": "alexis.mariano@example.com",
+"message": "Hola, este es un ejemplo de como probar la API ."
+}
