@@ -1,4 +1,3 @@
-
 package com.wilfredo.portfolio_api.service;
 
 import com.wilfredo.portfolio_api.dto.ContactRequest;
@@ -32,18 +31,18 @@ public class ContactService {
                 request.name()
         );
 
-        String subject = "Nuevo mensaje desde tu portafolio";
+        String emailSubject = "Nuevo mensaje desde tu portafolio";
 
         String body = buildContactHtml(request);
 
-        emailService.sendEmail(recipientEmail, subject, body);
+        emailService.sendEmail(recipientEmail, emailSubject, body);
     }
-
 
     private String buildContactHtml(ContactRequest request) {
 
         String name = HtmlUtils.htmlEscape(request.name());
         String email = HtmlUtils.htmlEscape(request.email());
+        String subject = HtmlUtils.htmlEscape(request.subject());
 
         String message = HtmlUtils.htmlEscape(request.message())
                 .replace("\r\n", "<br>")
@@ -144,8 +143,25 @@ public class ContactService {
 
                             <p style="color:#58a6ff;
                                       font-size:14px;
-                                      margin:0;
+                                      margin:0 0 18px;
                                       word-break:break-word;">
+                                %s
+                            </p>
+
+                            <hr style="border:0;
+                                       border-top:1px solid #30363d;
+                                       margin:0 0 18px;">
+
+                            <p style="color:#8b949e;
+                                      font-size:11px;
+                                      margin:0 0 6px;">
+                                ASUNTO
+                            </p>
+
+                            <p style="color:#c9d1d9;
+                                      font-size:14px;
+                                      font-weight:bold;
+                                      margin:0;">
                                 %s
                             </p>
 
@@ -219,7 +235,6 @@ public class ContactService {
 
                 </div>
             </div>
-            """.formatted(name, email, message);
+            """.formatted(name, email, subject, message);
     }
-
 }
