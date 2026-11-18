@@ -49,186 +49,136 @@ public class ContactService {
                 .replace("\n", "<br>")
                 .replace("\r", "<br>");
 
+        // Usa "%%" para porcentajes literales dentro de formatted().
         return """
             <div style="margin:0; padding:30px 15px;
                         background-color:#0d1117;
-                        font-family:Arial,Helvetica,sans-serif;">
+                        font-family:'Fira Code','JetBrains Mono',Menlo,Consolas,'Courier New',monospace;">
 
-                <div style="max-width:600px; margin:0 auto;
-                            background-color:#161b22;
+                <div style="max-width:640px; margin:0 auto;
+                            background-color:#0d1117;
                             border:1px solid #30363d;
                             border-radius:10px;
                             overflow:hidden;">
 
-                    <!-- HEADER -->
-                    <div style="padding:20px 24px;
-                                border-bottom:1px solid #30363d;">
+                    <table width="100%%" cellpadding="0" cellspacing="0"
+                           style="background-color:#161b22;
+                                  border-bottom:1px solid #30363d;">
+                        <tr>
+                            <td width="70" style="padding:12px 0 12px 16px;
+                                                  font-size:0; line-height:0;">
+                                <span style="display:inline-block; width:10px; height:10px;
+                                             border-radius:50%%; background-color:#ff5f56;
+                                             margin-right:6px;"></span><span style="display:inline-block; width:10px; height:10px;
+                                             border-radius:50%%; background-color:#ffbd2e;
+                                             margin-right:6px;"></span><span style="display:inline-block; width:10px; height:10px;
+                                             border-radius:50%%; background-color:#27c93f;"></span>
+                            </td>
+                            <td align="center" style="padding:12px 0;
+                                                      color:#8b949e;
+                                                      font-size:12px;">
+                                wilfredo@portfolio — terminal
+                            </td>
+                            <td width="70"></td>
+                        </tr>
+                    </table>
 
-                        <table width="100%%" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td style="color:#c9d1d9;
-                                           font-size:13px;
-                                           font-weight:bold;">
-                                    PORTFOLIO / NOTIFICATIONS
-                                </td>
+                    <div style="padding:24px; color:#c9d1d9;
+                                font-size:13px; line-height:1.7;">
 
-                                <td align="right">
-                                    <span style="display:inline-block;
-                                                 padding:5px 9px;
-                                                 background-color:#1c3326;
-                                                 border-radius:20px;
-                                                 color:#3fb950;
-                                                 font-size:10px;
-                                                 font-weight:bold;">
-                                        NEW MESSAGE
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-
-                    <!-- MAIN CONTENT -->
-                    <div style="padding:28px 24px;">
-
-                        <h2 style="color:#c9d1d9;
-                                   font-size:24px;
-                                   margin:0 0 10px;">
-                            Nuevo mensaje recibido
-                        </h2>
-
-                        <p style="color:#8b949e;
-                                  font-size:14px;
-                                  line-height:1.6;
-                                  margin:0;">
-                            Se ha recibido una nueva consulta desde tu portafolio.
+                        <p style="margin:0;">
+                            <span style="color:#3fb950;">wilfredo@portfolio</span><span style="color:#8b949e;">:</span><span style="color:#58a6ff;">~</span><span style="color:#8b949e;">$</span>
+                            <span style="color:#c9d1d9;">cat nuevo-mensaje.txt</span>
                         </p>
 
-                        <!-- CONTACT INFORMATION -->
-                        <div style="margin-top:28px;
-                                    padding:20px;
-                                    background-color:#0d1117;
-                                    border:1px solid #30363d;
-                                    border-radius:8px;">
+                        <p style="margin:10px 0 0; color:#3fb950; font-weight:bold;">
+                            [ OK ] Nuevo mensaje recibido desde tu portafolio
+                        </p>
 
-                            <p style="color:#3fb950;
-                                      font-size:11px;
-                                      font-weight:bold;
-                                      margin:0 0 20px;">
-                                01 / CONTACT INFORMATION
-                            </p>
+                        <p style="margin:24px 0 0;">
+                            <span style="color:#3fb950;">wilfredo@portfolio</span><span style="color:#8b949e;">:</span><span style="color:#58a6ff;">~</span><span style="color:#8b949e;">$</span>
+                            <span style="color:#c9d1d9;">cat contacto.json</span>
+                        </p>
 
-                            <p style="color:#8b949e;
-                                      font-size:11px;
-                                      margin:0 0 6px;">
-                                NOMBRE
-                            </p>
-
-                            <p style="color:#c9d1d9;
-                                      font-size:15px;
-                                      font-weight:bold;
-                                      margin:0 0 18px;">
-                                %s
-                            </p>
-
-                            <hr style="border:0;
-                                       border-top:1px solid #30363d;
-                                       margin:0 0 18px;">
-
-                            <p style="color:#8b949e;
-                                      font-size:11px;
-                                      margin:0 0 6px;">
-                                EMAIL
-                            </p>
-
-                            <p style="color:#58a6ff;
-                                      font-size:14px;
-                                      margin:0 0 18px;
-                                      word-break:break-word;">
-                                %s
-                            </p>
-
-                            <hr style="border:0;
-                                       border-top:1px solid #30363d;
-                                       margin:0 0 18px;">
-
-                            <p style="color:#8b949e;
-                                      font-size:11px;
-                                      margin:0 0 6px;">
-                                ASUNTO
-                            </p>
-
-                            <p style="color:#c9d1d9;
-                                      font-size:14px;
-                                      font-weight:bold;
-                                      margin:0;">
-                                %s
-                            </p>
-
-                        </div>
-
-                        <!-- MESSAGE -->
-                        <div style="margin-top:18px;
-                                    padding:20px;
-                                    background-color:#0d1117;
-                                    border:1px solid #30363d;
-                                    border-radius:8px;">
-
-                            <p style="color:#3fb950;
-                                      font-size:11px;
-                                      font-weight:bold;
-                                      margin:0 0 18px;">
-                                02 / MESSAGE
-                            </p>
-
-                            <p style="color:#8b949e;
-                                      font-size:11px;
-                                      margin:0 0 10px;">
-                                MESSAGE.TXT
-                            </p>
-
-                            <div style="color:#c9d1d9;
-                                        font-size:14px;
-                                        line-height:1.8;
-                                        overflow-wrap:break-word;">
-                                %s
-                            </div>
-
-                        </div>
-
-                        <!-- STATUS -->
-                        <table width="100%%"
-                               cellpadding="0"
-                               cellspacing="0"
-                               style="margin-top:25px;">
+                        <table width="100%%" cellpadding="0" cellspacing="0"
+                               style="margin-top:10px;
+                                      border-left:2px solid #30363d;">
                             <tr>
-                                <td style="color:#8b949e;
-                                           font-size:11px;">
-                                    DELIVERY STATUS
+                                <td width="90" valign="top"
+                                    style="padding:4px 0 4px 14px;
+                                           color:#8b949e; font-size:12px;">
+                                    nombre
                                 </td>
-
-                                <td align="right">
-                                    <span style="color:#3fb950;
-                                                 font-size:11px;
-                                                 font-weight:bold;">
-                                        ● RECEIVED
-                                    </span>
+                                <td style="padding:4px 0; color:#c9d1d9;
+                                           font-weight:bold; word-break:break-word;">
+                                    %s
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="90" valign="top"
+                                    style="padding:4px 0 4px 14px;
+                                           color:#8b949e; font-size:12px;">
+                                    email
+                                </td>
+                                <td style="padding:4px 0; color:#58a6ff;
+                                           word-break:break-word;">
+                                    %s
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="90" valign="top"
+                                    style="padding:4px 0 4px 14px;
+                                           color:#8b949e; font-size:12px;">
+                                    asunto
+                                </td>
+                                <td style="padding:4px 0; color:#c9d1d9;
+                                           font-weight:bold; word-break:break-word;">
+                                    %s
                                 </td>
                             </tr>
                         </table>
 
+                        <p style="margin:24px 0 0;">
+                            <span style="color:#3fb950;">wilfredo@portfolio</span><span style="color:#8b949e;">:</span><span style="color:#58a6ff;">~</span><span style="color:#8b949e;">$</span>
+                            <span style="color:#c9d1d9;">cat mensaje.txt</span>
+                        </p>
+
+                        <div style="margin-top:10px;
+                                    padding:14px 16px;
+                                    background-color:#161b22;
+                                    border:1px solid #30363d;
+                                    border-radius:6px;
+                                    color:#c9d1d9;
+                                    line-height:1.8;
+                                    overflow-wrap:break-word;
+                                    word-break:break-word;">
+                            %s
+                        </div>
+
+                        <p style="margin:24px 0 0;">
+                            <span style="color:#3fb950;">wilfredo@portfolio</span><span style="color:#8b949e;">:</span><span style="color:#58a6ff;">~</span><span style="color:#8b949e;">$</span>
+                            <span style="color:#c9d1d9;">status --delivery</span>
+                        </p>
+
+                        <p style="margin:10px 0 0; color:#3fb950; font-weight:bold;">
+                            ● RECEIVED
+                        </p>
+
+                        <p style="margin:24px 0 0; color:#8b949e;">
+                            <span style="color:#3fb950;">wilfredo@portfolio</span>:<span style="color:#58a6ff;">~</span>$ <span style="color:#c9d1d9;">█</span>
+                        </p>
+
                     </div>
 
-                    <!-- FOOTER -->
-                    <div style="padding:18px 20px;
+                    <div style="padding:14px 20px;
                                 border-top:1px solid #30363d;
+                                background-color:#161b22;
                                 text-align:center;">
 
                         <p style="color:#8b949e;
                                   font-size:11px;
                                   margin:0;">
-                            Generated by Wilfredo's Portfolio
-                            · Contact API
+                            Generated by Wilfredo's Portfolio · Contact API
                         </p>
 
                     </div>
