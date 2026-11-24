@@ -1,38 +1,51 @@
 package com.wilfredo.portfolio_api.service;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.mail.MailSendException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SmtpEmailService implements EmailService {
 
-    private final JavaMailSender mailSender;
+    private final RestClient restClient;
+    private final String apiKey;
+    private final String senderEmail;
 
-    public SmtpEmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    public SmtpEmailService(
+            @Value("${BREVO_API_KEY}") String apiKey,
+            @Value("${MAIL_USERNAME}") String senderEmail) {
+        this.restClient = RestClient.create("https://brevo.com");
+        this.apiKey = apiKey;
+        this.senderEmail = senderEmail;
     }
 
     @Override
     public void sendEmail(String to, String subject, String body) {
         try {
-            MimeMessage email = mailSender.createMimeMessage();
+            Map<String, Object> payload = Map.of(
+                    "sender", Map.of("name", "Portafolio Web", "email", senderEmail),
+                    "to", List.of(Map.of("email", to)),
+                    "subject", subject,
+                    "htmlContent", body
+            );
 
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(email, false, "UTF-8");
+            restClient.post()
+                    .uri("/smtp/email")
+                    .header("api-key", apiKey)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(payload)
+                    .retrieve()
+                    .toBodilessEntity();
 
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(body, true);
-
-            mailSender.send(email);
-
-        } catch (MessagingException ex) {
+        } catch (RestClientException ex) {
             throw new MailSendException(
-                    "No se pudo preparar el correo electrónico.", ex
+                    "No se pudo enviar el correo electrónico a través de Brevo.", ex
             );
         }
     }
