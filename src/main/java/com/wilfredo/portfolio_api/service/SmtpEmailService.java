@@ -20,7 +20,7 @@ public class SmtpEmailService implements EmailService {
     public SmtpEmailService(
             @Value("${BREVO_API_KEY}") String apiKey,
             @Value("${MAIL_USERNAME}") String senderEmail) {
-        this.restClient = RestClient.create("https://brevo.com");
+        this.restClient = RestClient.create("https://api.brevo.com/v3");
         this.apiKey = apiKey;
         this.senderEmail = senderEmail;
     }
